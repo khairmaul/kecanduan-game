@@ -1,0 +1,42 @@
+extends base
+
+block content
+    main.grow.bg-gray-100.flex
+
+        .flex.items-center.justify-center.m-0.bg-purple-100(class='w-1/2')
+            img.w-full(src='/img/gaming-time.png')
+
+        .flex.flex-col.justify-start.items-start.grow.bg-gray-100.p-6.space-y-6(class='w-1/2')
+            if selectedUser && user && user.role === 'admin'
+                .bg-purple-900.rounded-lg.pr-6.pl-4.py-2.text-white.text-base.flex.items-center.justify-center.space-x-2
+                    span.material-icons.text-lg.p-0 person 
+                    span.uppercase=selectedUser.name
+            .justify-self-end.overflow-y-auto.rounded-lg.grow.h-96
+                table.w-full.table-fixed.border-separate(class =`${!results ? 'h-full' : ''}`)
+                    thead.bg-purple-900
+                        tr.text-white
+                            th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-center.rounded-tl-lg(class='w-16') No
+                            th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Tanggal dan Waktu
+                            th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.grow(class=`w-3/6 ${results && user && user.role === 'user' ? '' : 'rounded-tr-lg'}`) Hasil
+                            if results && user && user.role === 'user'
+                                th.text-xs.tracking-wide.text-center.rounded-tr-lg(class='w-1/6')
+                                    .flex.items-center.justify-center.w-full
+                                        button#btn-delete-all-results.flex.justify-center.items-center(class='hover:shadow-lg' data-user=user.id)
+                                            span.material-icons.cursor-pointer.text-white(class='hover:text-red-600') delete_forever
+                    tbody.devide-y.devide-gray-100.rounded-b-lg
+                        if results 
+                            each item, i in results
+                                tr.bg-white.border-b.cursor-pointer(class='hover:bg-purple-100' onclick=`location.href='/result?id=${item.id}&title=${title}'`)
+                                    td.px-6.py-4.text-sm.text-gray-700.text-cente(class=`${i === results.length-1 ? 'rounded-bl-lg' : ''}`)=i+1
+                                    - const date = item.createdAt.toLocaleString('id', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second:'numeric' })
+                                    td.px-6.py-4.text-sm.text-gray-700=date                         
+                                    td.px-6.py-4.text-sm.text-gray-700(class=`${user && user.role === 'user' ? '' : i === results.length-1 ? 'rounded-br-lg' : ''}`) #{item.classification ? item.classification : '-'}                     
+                                    if user && user.role === 'user'
+                                        td.px-4.whitespace-nowrap.rounded-br-lg(onclick=`event.stopPropagation();`)
+                                            .flex.items-center.justify-center.w-full                              
+                                                button.btn-delete-result.flex.justify-center.items-center(data-item=`${JSON.stringify(item)}`)
+                                                    span.material-icons.cursor-pointer.text-purple-900(class='hover:text-purple-500') do_not_disturb_on
+                        else
+                            tr(class=`bg-white`)
+                                td.text-sm.text-gray-400.text-center.rounded-b-lg(colspan=`3`) Data riwayat tidak ditemukan
+        

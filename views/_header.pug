@@ -1,0 +1,220 @@
+mixin drawerLogin()
+    #login-drawer.fixed.top-0.left-0.z-40.h-screen.p-4.overflow-y-auto.transition-transform.-translate-x-full.bg-white.w-80(tabindex='-1')
+        h5#drawer-label-login.inline-flex.items-center.mb-6.text-base.font-bold.text-purple-900.uppercase.w-full
+            | Masuk ke Aplikasi
+        button#btn-close-login.text-gray-400.bg-transparent.rounded-lg.text-sm.absolute.inline-flex.items-center(type='button' class='hover:bg-gray-200 hover:text-gray-900 p-1.5 top-2.5 right-2.5')
+            span.material-icons close
+            span.sr-only Close modal
+        form#login-form.space-y-3
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='email') Email
+                input#email-login.bg-gray-50.border.border-gray-300.text-gray-900.text-sm.rounded-lg.block.w-full(type='email' name='email' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' placeholder='Isi email anda disini...' required='')
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='password') Kata Sandi
+                input#password-login.bg-gray-50.border.border-gray-300.text-gray-900.text-sm.rounded-lg.block.w-full(type='password' name='password' placeholder='Isi kata sandi disini...' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+            .flex.w-full.items-center
+                button#btn-login.w-full.bg-purple-900.text-white.rounded-lg.text-base.px-6.py-3.text-center.mt-6(type='submit' class='hover:shadow-lg') Masuk
+
+mixin drawerRegister()
+    #register-drawer.fixed.top-0.left-0.z-40.h-screen.p-4.overflow-y-auto.transition-transform.-translate-x-full.bg-white.w-80(tabindex='-1')
+        h5#drawer-label-register.inline-flex.items-center.mb-6.text-base.font-bold.text-purple-900.uppercase.w-full
+            | Daftar Akun Baru
+        button#btn-close-register.text-gray-400.bg-transparent.rounded-lg.text-sm.absolute.inline-flex.items-center(type='button' class='hover:bg-gray-200 hover:text-gray-900 p-1.5 top-2.5 right-2.5')
+            span.material-icons close
+            span.sr-only Close modal
+        form#register-form.space-y-3
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='email') Nama
+                input#name-register.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full.text-sm(type='text' name='name' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' placeholder='Nama anda' required='')
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='email') Email
+                input#email-register.bg-gray-50.border.border-gray-300.text-gray-900.text-sm.rounded-lg.block.w-full(type='email' name='email' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' placeholder='Isi email anda disini...' required='')
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='password') Kata Sandi
+                input#password-register.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full.text-sm(type='password' name='password' placeholder='••••••••' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+            div
+                label.block.ml-1.mb-2.text-sm.font-medium.text-gray-900(for='password') Konfirmasi Kata Sandi
+                input#password-confirm-register.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full.text-sm(type='password' name='password' placeholder='••••••••' class='focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+            .flex.w-full.items-center
+                button#btn-register.w-full.bg-purple-900.text-white.rounded-lg.text-base.px-6.py-3.text-center.mt-6(type='submit' class='hover:shadow-lg') Daftar
+
+mixin drawerConfirm()
+    // drawer component
+    #confirm-drawer.fixed.top-0.left-0.right-0.z-40.w-full.p-4.transition-transform.-translate-y-full.bg-transparent(tabindex='-1')
+        .flex.items-center.justify-center
+            .relative.bg-white.rounded-lg(class='w-1/3')
+                button#btn-close-confirm.absolute.top-5.text-gray-400.bg-transparent.rounded-lg.text-sm.ml-auto.inline-flex.items-center(type='button' class='right-2.5 hover:bg-gray-200 hover:text-gray-900 p-1.5')
+                    span.material-icons close
+                    span.sr-only Close modal
+                .flex.flex-col.space-y-4.p-6.text-start
+                    h3#message-confirm.mb-5.mr-6.text-lg.font-normal.text-gray-500 -
+
+                    .flex.justify-end.items-center
+                        button#btn-positive-confirm.text-white.bg-purple-900.font-medium.rounded-lg.text-sm.inline-flex.items-center.px-5.text-center.mr-2( type='button' class='hover:shadow-lg py-2.5')
+                            | Ya, benar
+                        button#btn-negative-confirm.text-gray-500.bg-white.rounded-lg.border.border-gray-200.text-sm.font-medium.px-5(type='button' class='hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 py-2.5 hover:text-gray-900 focus:z-10 ') Tidak, batal
+
+mixin drawerSettingAccount()
+    #setting-account-drawer.fixed.top-0.left-0.z-40.h-screen.p-4.overflow-y-auto.transition-transform.-translate-x-full.bg-white.w-80(tabindex='-1')
+        button#btn-close-setting-account.text-gray-400.bg-transparent.rounded-lg.text-sm.absolute.inline-flex.items-center(type='button' class='hover:bg-gray-200 hover:text-gray-900 p-1.5 top-2.5 right-2.5')
+            span.material-icons close
+            span.sr-only Close modal
+        .flex.flex-col.space-y-6
+            h3.mb-2.text-xl.font-bold.text-gray-900.text-start Pengaturan Akun
+            img#img-update.rounded-lg.border-2.border-gray-200.aspect-square.object-cover.w-28.self-center(src=`${user.photo ? '/img/users/'+user.photo : '/img/person-icon.png'}`, alt='User photo')
+
+            input#img-update-input.block.w-full.text-sm.text-gray-900.border.border-gray-300.rounded-lg.cursor-pointer.bg-gray-50(class='focus:outline-none' aria-describedby='user_avatar_help' type='file' accept="image/*")
+
+            form#setting-account-form.space-y-3(action='#')
+                div
+                    label.block.mb-2.text-sm.font-medium.text-gray-900(for='name') Nama Anda
+                    input#name-auth.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full.text-sm(type='text' name='name' class='sm:text-sm focus:ring-purple-900 focus:border-purple-900 p-2.5' placeholder='Isi nama anda' required='' value=`${user.name}`)
+                div
+                    label.block.mb-2.text-sm.font-medium.text-gray-900(for='email') Email Anda
+                    input#email-auth.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full.text-sm(type='email' name='email' class='sm:text-sm focus:ring-purple-900 focus:border-purple-900 p-2.5' placeholder='Alamat email' required='' value=`${user.email}`)
+                .flex.w-full
+                    button#btn-save-account.text-white.bg-purple-900.font-medium.rounded-lg.text-base.px-5.py-3.text-center.mt-6.w-full(type='submit' class='hover:shadow-lg') Simpan
+
+mixin drawerSettingPassword()
+    #setting-password-drawer.fixed.top-0.left-0.z-40.h-screen.p-4.overflow-y-auto.transition-transform.-translate-x-full.bg-white.w-80(tabindex='-1')
+        button#btn-close-setting-password.text-gray-400.bg-transparent.rounded-lg.text-sm.absolute.inline-flex.items-center(type='button' class='hover:bg-gray-200 hover:text-gray-900 p-1.5 top-2.5 right-2.5')
+            span.material-icons close
+            span.sr-only Close modal
+        .flex.flex-col.space-y-6
+            h3.mb-2.text-xl.font-semibold.text-gray-900.text-start Perbarui Kata Sandi
+            form#setting-password-form.space-y-3(action='#')
+                div
+                    label.block.mb-2.text-sm.font-medium.text-gray-900(for='password') Kata Sandi Sekarang
+                    input#password-current.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full(type='password' name='password' placeholder='••••••••' class='sm:text-sm focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+                div
+                    label.block.mb-2.text-sm.font-medium.text-gray-900(for='password') Kata Sandi Baru
+                    input#password.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full(type='password' name='password' placeholder='••••••••' class='sm:text-sm focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+                div
+                    label.block.mb-2.text-sm.font-medium.text-gray-900(for='password') Konfirmasi Kata Sandi Baru
+                    input#password-confirm.bg-gray-50.border.border-gray-300.text-gray-900.rounded-lg.block.w-full(type='password' name='password' placeholder='••••••••' class='sm:text-sm focus:ring-purple-900 focus:border-purple-900 p-2.5' required='')
+                .flex.w-full
+                    button#btn-save-password.text-white.bg-purple-900.font-medium.rounded-lg.text-base.px-5.py-3.text-center.mt-6.w-full(type='submit' class='hover:shadow-lg') Simpan
+
+mixin dropdownUser()
+    #user-dropdown.z-50.hidden.text-base.list-none.bg-purple-50.divide-y.divide-purple-200.rounded-lg.border.border-purple-200
+        .px-4.py-3
+            span.block.text-sm.text-gray-900.font-semibold #{user.name}
+            span.block.text-sm.text-gray-500.truncate #{user.email}
+        ul.py-2(aria-labelledby='user-menu-button')
+            li
+                button#btn-setting-account.w-full.block.px-4.py-2.text-sm.text-gray-700.text-start(class='hover:bg-purple-100') Pengaturan Akun
+            li
+                button#btn-setting-password.w-full.block.px-4.py-2.text-sm.text-gray-700.text-start(class='hover:bg-purple-100') Pengaturan Sandi
+            li
+                button#btn-log-out.block.px-4.py-2.text-sm.text-red-700.w-full.text-start.font-semibold(href='#' class='hover:bg-purple-100') Logout
+
+header
+    nav.bg-white.border-gray-200
+        .flex.flex-wrap.items-center.justify-between.mx-auto.px-6.py-2
+            a.flex.items-center(href='/' class='w-1/4')
+                img.w-10.h-10.mr-4.object-contain(src='/img/logo.png' alt='Flowbite Logo')
+                //- ADDICTICA (Addiction Diagnostic for Gamers)
+                span.self-center.text-xl.font-semibold.whitespace-nowrap ADDICTICA
+            .flex.items-center.justify-end(class='md:order-2 w-1/4')
+                if title === 'Artikel'
+                    .relative
+                        .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+                            span.material-icons.text-gray-500.text-lg search
+                        form(method='GET' action='/article')
+                            input.block.pr-5.pl-10.py-2.text-sm.text-gray-900.border.border-purple-900.rounded-lg.bg-purple-100(type='text' name='keyword' class='focus:ring-purple-900 focus:border-purple-900' placeholder='Cari artikel...' value=`${keyword ? keyword : ''}`)
+                    if user && user.role === 'admin'
+                        button#btn-add-article.rounded-lg.bg-purple-900.text-white.font-semibold.flex.items-center.justify-center.p-2.ml-3(class="hover:shadow-lg")
+                            span.material-icons add
+                else if title === 'Gejala'
+                    .relative
+                        .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+                            span.material-icons.text-gray-500.text-lg search
+                        form(method='GET' action='/symptom')
+                            input.block.pr-5.pl-10.py-2.text-sm.text-gray-900.border.border-purple-900.rounded-lg.bg-purple-100(type='text' name='keyword' class='focus:ring-purple-900 focus:border-purple-900' placeholder='Cari gejala atau faktor...' value=`${keyword ? keyword : ''}`)
+                    if user && user.role === 'admin'
+                        button#btn-add-symptom.rounded-lg.bg-purple-900.text-white.font-semibold.flex.items-center.justify-center.p-2.ml-3(class="hover:shadow-lg")
+                            span.material-icons add
+                else if title === 'Solusi'
+                    .relative
+                        .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+                            span.material-icons.text-gray-500.text-lg search
+                        form(method='GET' action='/solution')
+                            input.block.pr-5.pl-10.py-2.text-sm.text-gray-900.border.border-purple-900.rounded-lg.bg-purple-100(type='text' name='keyword' class='focus:ring-purple-900 focus:border-purple-900' placeholder='Cari solusi...' value=`${keyword ? keyword : ''}`)
+                    if user && user.role === 'admin'
+                        button#btn-add-solution.rounded-lg.bg-purple-900.text-white.font-semibold.flex.items-center.justify-center.p-2.ml-3(class="hover:shadow-lg")
+                            span.material-icons add
+                else if title === 'Pengguna'
+                    .relative
+                        .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+                            span.material-icons.text-gray-500.text-lg search
+                        form(method='GET' action='/user')
+                            input.block.pr-5.pl-10.py-2.text-sm.text-gray-900.border.border-purple-900.rounded-lg.bg-purple-100(type='text' name='keyword' class='focus:ring-purple-900 focus:border-purple-900' placeholder='Cari pengguna...' value=`${keyword ? keyword : ''}`)
+                else if title === 'Riwayat'
+                    .relative
+                        .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+                            span.material-icons.text-gray-500.text-lg history
+                        select#select-filter-history.py-2.cursor-pointer.border.border-purple-900.rounded-lg.text-gray-700.text-sm.bg-gray-50.pr-5.pl-10.bg-purple-100(name='select-diagnose' required class='focus:ring-purple-900 focus:border-purple-900')
+                            option(value='') Semua 
+                            if filter==='7'  
+                                option(value='7' selected) 7 hari terakhir
+                            else
+                                option(value='7') 7 hari terakhir
+
+                            if filter==='30'
+                                option(value='30' selected) 1 bulan terakhir
+                            else
+                                option(value='30') 1 bulan terakhir
+
+                            if filter==='365'
+                                option(value='365' selected) 1 tahun terakhir
+                            else 
+                                option(value='365') 1 tahun terakhir
+                //- else
+                if user
+                    button#user-menu-button.flex.mr-3.text-sm.bg-gray-800.rounded-full.ml-3(type='button' class='md:mr-0 focus:ring-4 focus:ring-gray-300' aria-expanded='false' data-dropdown-toggle='user-dropdown' data-dropdown-placement='bottom')
+                        span.sr-only Open user menu
+                        img.w-10.h-10.rounded-full.aspect-square(src=`${user && user.photo ? '/img/users/'+user.photo : '/img/users/person-icon.png'}` alt="")
+                    +dropdownUser()
+                else
+                    button#btn-register.rounded-full.py-2.px-6.text-purple-900.font-semibold.mx-2.bg-purple-100.border.border-purple-900.text-sm(class="hover:shadow-lg")
+                        | Daftar
+                    button#btn-login.rounded-full.bg-purple-900.py-2.px-6.text-white.font-semibold.text-sm(class="hover:shadow-lg")
+                        | Masuk
+
+                button.inline-flex.items-center.p-2.ml-1.text-sm.text-gray-500.rounded-lg(data-collapse-toggle='mobile-menu-2' type='button' class='md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200' aria-controls='mobile-menu-2' aria-expanded='false')
+                    span.sr-only Open main menu
+                    svg.w-6.h-6(aria-hidden='true' fill='currentColor' viewbox='0 0 20 20' xmlns='http://www.w3.org/2000/svg')
+                        path(fill-rule='evenodd' d='M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z' clip-rule='evenodd')
+            #mobile-menu-2.items-center.justify-between.hidden.w-full(class='md:flex md:w-auto md:order-1')
+                ul.flex.flex-col.items-center.font-medium.p-4.mt-4.border.border-gray-100.rounded-lg.bg-gray-50(class='md:p-0 md:flex-row md:space-x-4 md:mt-0 md:border-0 md:bg-white')
+                    li
+                        a.block.py-1.px-4(href='/' class=`hover:text-purple-900 ${title==='Dashboard'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Dashboard
+
+                    li
+                        a.block.py-1.px-4(href='/symptom' class=`hover:text-purple-900 ${title==='Gejala'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Gejala
+
+                    li
+                        a.block.py-1.px-4(href='/solution' class=`hover:text-purple-900 ${title==='Solusi'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Solusi
+
+                    
+                    if user && user.role === 'admin'
+                        li
+                            a.block.py-1.px-4(href='/user' class=`hover:text-purple-900 ${title==='Pengguna' || title==='Riwayat'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Pengguna
+                            
+                    if user && user.role === 'user' 
+                        li
+                            a.block.py-1.px-4(href='/consultation' class=`hover:text-purple-900 ${title==='Konsultasi'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Konsultasi
+                        li
+                            a.block.py-1.px-4(href='/history' class=`hover:text-purple-900 ${title==='Riwayat'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Riwayat
+
+                    li
+                        a.block.py-1.px-4(href='/article' class=`hover:text-purple-900 ${title==='Artikel'? 'text-purple-900 font-bold border border-purple-900 rounded-full bg-purple-100' : 'text-gray-900 font-normal'}`) Artikel
+
+
+        if user
+            +drawerSettingAccount()
+            +drawerSettingPassword()
+            +drawerConfirm()
+        else
+            +drawerLogin()
+            +drawerRegister()

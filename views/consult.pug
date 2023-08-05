@@ -1,0 +1,37 @@
+extends base
+
+block content
+    main.grow.bg-gray-100.flex
+
+        .flex.items-center.justify-center.m-0.bg-purple-100(class='w-1/2')
+            img.w-full(src='/img/gaming-consult.png')
+
+        .flex.flex-col.justify-start.items-start.grow.bg-gray-100.p-6(class='w-1/2')
+            .flex.flex-col.w-full.bg-white.rounded-lg.space-y-6.grow.p-6.overflow-y-auto.h-96(class=`${symptoms ? 'justify-start' : 'justify-center'}`)
+                if symptoms                 
+                    h1.text-xl.font-bold.text-gray-900
+                        | Kuesioner Konsultasi Tingkat Kecanduan Game Online (Fuzzy Tsukamoto)
+
+                    hr
+
+                    form#consult-form.space-y-6(data-user=user.id data-title=title)
+                        if symptoms 
+                            each item, i in symptoms
+                                .flex.flex-col.w-full.space-y-3
+                                    .flex.items-start.space-x-2
+                                        span.text-gray-900.text-base #{i+1}.
+                                        
+                                        .flex.flex-col.justify-start.space-y-3
+                                            span.text-gray-900.text-base.grow #{item.name} (#{item.factor})
+                                            select.select-answer.cursor-pointer.border.border-gray-300.rounded-lg.text-gray-900.text-sm.bg-gray-50.px-3.w-60.bg-purple-50(required class='focus:ring-purple-900 focus:border-purple-900 py-2.5' data-factor=item.factor)
+                                                option(value='') Pilih
+                                                option(value='sangat tidak sesuai') Sangat kurang sesuai                
+                                                option(value='tidak sesuai') Kurang sesuai                
+                                                option(value='cukup sesuai') Cukup sesuai                
+                                                option(value='sesuai') Sesuai                
+                                                option(value='sangat sesuai') Sangat sesuai                
+                        hr
+                        .flex.justify-end
+                            button#btn-submit.text-white.bg-purple-900.font-medium.rounded-lg.text-base.px-5.text-center.uppercase(type='submit' class='hover:shadow-lg focus:ring-4 focus:outline-none focus:ring-primary-300 py-2.5') cek hasil
+                else                    
+                    span.self-center.text-sm.text-gray-400 Data gejala tidak ditemukan

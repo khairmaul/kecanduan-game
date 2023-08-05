@@ -1,0 +1,219 @@
+extends base
+
+block content
+    main.w-full.bg-gray-100.flex.flex-col.justify-start.items-center.grow.p-6
+        .flex.flex-col.rounded-lg.justify-start.items-start.bg-purple-100.p-6.space-y-6.border.border-purple-200(class=`w-full ${user && user.role==='admin' ? 'grow': ''}`)
+            .flex.w-full
+                .flex.flex-col.bg-purple-900.text-white.rounded-lg.px-4.py-2.text-sm
+                    .flex.w-full.items-center.space-x-2
+                        span.material-icons.text-lg person
+                        span=result.user.name
+                    .flex.w-full.items-center.space-x-2
+                        span.material-icons.text-lg email
+                        span=result.user.email
+                    - const date = result.createdAt.toLocaleString('id', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second:'numeric' })
+                    .flex.w-full.items-center.space-x-2
+                        span.material-icons.text-lg event
+                        span=date
+                .flex.grow.justify-end.items-start
+                    .flex.flex-col.bg-purple-900.text-white.rounded-lg.px-4.py-2.text-base
+                        .flex.w-full.items-center.space-x-2
+                            - const z = result.zValue
+                            - const zNilai = Math.floor(z) !== z ? z.toFixed(2) : z
+                            span.font-semibold Hasil : 
+                            span.font-semibold.uppercase #{result.classification} (z = #{zNilai})
+
+            .flex.flex-col.w-full.rounded-lg.bg-purple-900.px-4.py-3.text-white.space-y-3
+                span.font-semibold Solusi & Saran
+                p #{solution && solution.length>0 ? solution[0].name : '-'}
+
+            if user && user.role==='admin'
+                //-VARIABLE INPUT
+                .bg-purple-300.w-full(class='h-0.5')
+                span.text-base.font-semibold Tabel Pembobotan Variable Input
+
+                .justify-self-end.overflow-y-auto.rounded-lg.grow
+                    table.w-full.table-fixed.border-separate
+                        thead.bg-purple-900
+                            tr.text-white
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-center.rounded-tl-lg(class='w-16') No
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Variable Input
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.rounded-tr-lg Pembobotan
+                            
+                        tbody.devide-y.devide-gray-100.rounded-b-lg
+                            if result && result.weight 
+                                each item, i in result.weight 
+                                    tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                        td.px-6.py-4.text-sm.text-gray-700.text-cente(class=`${i === result.weight.length-1 ? 'rounded-bl-lg' : ''}`)=i+1
+                                        td.px-6.py-4.text-sm.text-gray-700=item.name                         
+                                        td.px-6.py-4.text-sm.text-gray-700(class=`${i === result.weight.length-1 ? 'rounded-br-lg' : ''}`)=item.value                    
+                            else
+                                tr(class=`bg-white`)
+                                    td.text-sm.text-gray-400.text-center.rounded-b-lg.py-20(colspan=`3`) Data variable input tidak ditemukan
+
+                //- FUZZYFICATION
+                .bg-purple-300.w-full(class='h-0.5')
+                span.text-base.font-semibold Tabel Derajat Keanggotaan (Fuzzifikasi)
+
+                .justify-self-end.overflow-y-auto.rounded-lg.grow
+                    table.w-full.table-fixed.border-separate
+                        thead.bg-purple-900
+                            tr.text-white
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-center.rounded-tl-lg(class='w-16') No
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Variable Input
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Himpunan Fuzzy
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.rounded-tr-lg Nilai
+                            
+                        tbody.devide-y.devide-gray-100.rounded-b-lg
+                            if fuzzyfication
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=1
+                                    td.px-6.py-4.text-sm.text-gray-700 salience                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const salienceRingan = fuzzyfication.salience.ringan                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(salienceRingan) !== salienceRingan ? salienceRingan.toFixed(2) : salienceRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=2
+                                    td.px-6.py-4.text-sm.text-gray-700 salience                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const salienceBerat = fuzzyfication.salience.berat                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(salienceBerat) !== salienceBerat ? salienceBerat.toFixed(2) : salienceBerat}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=3
+                                    td.px-6.py-4.text-sm.text-gray-700 mood modification                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const moodRingan = fuzzyfication.mood.ringan                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(moodRingan) !== moodRingan ? moodRingan.toFixed(2) : moodRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=4
+                                    td.px-6.py-4.text-sm.text-gray-700 mood modification                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const moodBerat = fuzzyfication.mood.berat                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(moodBerat) !== moodBerat ? moodBerat.toFixed(2) : moodBerat}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=5
+                                    td.px-6.py-4.text-sm.text-gray-700 tolerance                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const toleranceRingan = fuzzyfication.tolerance.ringan                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(toleranceRingan) !== toleranceRingan ? toleranceRingan.toFixed(2) : toleranceRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=6
+                                    td.px-6.py-4.text-sm.text-gray-700 tolerance                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const toleranceBerat = fuzzyfication.tolerance.berat                       
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(toleranceBerat) !== toleranceBerat ? toleranceBerat.toFixed(2) : toleranceBerat}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=7
+                                    td.px-6.py-4.text-sm.text-gray-700 withdrawal symptoms                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const withdrawalRingan = fuzzyfication.withdrawal.ringan                       
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(withdrawalRingan) !== withdrawalRingan ? withdrawalRingan.toFixed(2) : withdrawalRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=8
+                                    td.px-6.py-4.text-sm.text-gray-700 withdrawal symptoms                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const withdrawalBerat = fuzzyfication.withdrawal.berat                    
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(withdrawalBerat) !== withdrawalBerat ? withdrawalBerat.toFixed(2) : withdrawalBerat}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=9
+                                    td.px-6.py-4.text-sm.text-gray-700 conflict                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const conflictRingan = fuzzyfication.conflict.ringan                      
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(conflictRingan) !== conflictRingan ? conflictRingan.toFixed(2) : conflictRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=10
+                                    td.px-6.py-4.text-sm.text-gray-700 conflict                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const conflictBerat = fuzzyfication.conflict.berat                     
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(conflictBerat) !== conflictBerat ? conflictBerat.toFixed(2) : conflictBerat}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center=11
+                                    td.px-6.py-4.text-sm.text-gray-700 relapse                      
+                                    td.px-6.py-4.text-sm.text-gray-700 ringan
+                                    - const relapseRingan = fuzzyfication.relapse.ringan                       
+                                    td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(relapseRingan) !== relapseRingan ? relapseRingan.toFixed(2) : relapseRingan}
+                                tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                    td.px-6.py-4.text-sm.text-gray-700.text-center.rounded-bl-lg=12
+                                    td.px-6.py-4.text-sm.text-gray-700 relapse                      
+                                    td.px-6.py-4.text-sm.text-gray-700 berat
+                                    - const relapseBerat = fuzzyfication.relapse.berat                      
+                                    td.px-6.py-4.text-sm.text-gray-700.rounded-br-lg #{Math.floor(relapseBerat) !== relapseBerat ? relapseBerat.toFixed(2) : relapseBerat}
+                            else
+                                tr(class=`bg-white`)
+                                    td.text-sm.text-gray-400.text-center.rounded-b-lg.py-20(colspan=`4`) Data derajat keanggotaan tidak ditemukan  
+
+                //- SYSTEM INFERENCE
+                .bg-purple-300.w-full(class='h-0.5')
+                span.text-base.font-semibold Tabel Aturan Fuzzy (Sistem Inferensi)
+
+                .justify-self-end.overflow-y-auto.rounded-lg.grow
+                    table.w-full.table-fixed.border-separate
+                        thead.bg-purple-900
+                            tr.text-white
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-center.rounded-tl-lg(class='w-16') No
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Salience
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Mood Modification
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Tolerance
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Withdrawal Symptoms
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Conflict
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Relapse
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Alpha
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Z
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.rounded-tr-lg Aplha * Z
+                            
+                        tbody.devide-y.devide-gray-100.rounded-b-lg
+                            if rules && ruleStr
+                                each rule, i in rules
+                                    tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                        td.px-6.py-4.text-sm.text-gray-700.text-center=i+1
+                                        - const str = Object.values(ruleStr[i])
+                                        each r, j in rule                                            
+                                            td.px-6.py-4.text-sm.text-gray-700(class=`${r===rule[6] ? 'font-semibold' : ''}`) #{Math.floor(r) !== r ? r.toFixed(2) : r} #{j<=5 ?'('+str[j]+')' : ''} #{j===7 ? '('+str[6]+')' : ''}              
+                            else
+                                tr(class=`bg-white`)
+                                    td.text-sm.text-gray-400.text-center.rounded-b-lg.py-20(colspan=`8`) Data aturan fuzzy tidak ditemukan
+
+                .bg-purple-300.w-full(class='h-0.5')
+                //span.text-base.font-semibold Tabel Domain Variable Output
+
+                //.justify-self-end.overflow-y-auto.rounded-lg.grow
+                    table.w-full.table-fixed.border-separate
+                        thead.bg-purple-900
+                            tr.text-white
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-center.rounded-tl-lg(class='w-16') No
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left Variable Linguistik
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.grow.rounded-tr-lg Domain
+                            
+                        tbody.devide-y.devide-gray-100.rounded-b-lg
+                            tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                td.px-6.py-4.text-sm.text-gray-700.text-center=1
+                                td.px-6.py-4.text-sm.text-gray-700 Ringan                      
+                                td.px-6.py-4.text-sm.text-gray-700 0 - 50
+                            tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                td.px-6.py-4.text-sm.text-gray-700.text-center=2
+                                td.px-6.py-4.text-sm.text-gray-700 Sedang                    
+                                td.px-6.py-4.text-sm.text-gray-700 51 - 80
+                            tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                td.px-6.py-4.text-sm.text-gray-700.text-center(class='rounded-bl-lg')=3
+                                td.px-6.py-4.text-sm.text-gray-700 Berat                     
+                                td.px-6.py-4.text-sm.text-gray-700(class='rounded-br-lg') 81 - 100  
+                
+                .bg-purple-300.w-full(class='h-0.5')
+                span.text-base.font-semibold Tabel Output menggunakan Center Average Defuzzyfier (Defuzzifikasi)
+
+                .justify-self-end.overflow-y-auto.rounded-lg.grow
+                    table.w-full.table-fixed.border-separate
+                        thead.bg-purple-900
+                            tr.text-white
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.rounded-tl-lg ∑(𝛼_𝑝𝑖 ∗ 𝑧𝑖)
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left ∑𝛼_𝑝𝑖
+                                th.px-6.py-4.text-sm.font-semibold.tracking-wide.text-left.rounded-tr-lg Z
+                            
+                        tbody.devide-y.devide-gray-100.rounded-b-lg
+                            tr.bg-white.border-b.cursor-pointer(class = 'hover:bg-purple-200')
+                                - const x = defuzzyfication.totalAlphaMulti
+                                td.px-6.py-4.text-sm.text-gray-700.rounded-bl-lg #{Math.floor(x) !== x ? x.toFixed(2) : x}
+                                - const y = defuzzyfication.totalAlpha                   
+                                td.px-6.py-4.text-sm.text-gray-700 #{Math.floor(y) !== y ? y.toFixed(2) : y}
+                                - const finalZ = defuzzyfication.z                  
+                                td.px-6.py-4.text-sm.text-gray-700.rounded-br-lg #{Math.floor(finalZ) !== finalZ ? finalZ.toFixed(2) : finalZ}

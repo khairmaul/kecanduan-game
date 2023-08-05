@@ -1,0 +1,23 @@
+extends base
+
+mixin userBox(id, photo, name, email, date)
+    .max-w-full.rounded-lg.bg-white.flex.flex-col.items-start.p-6.space-y-2.cursor-pointer(class='hover:bg-pink-100' onclick=`window.location.href='/history?id=${id}'`)
+        img.w-full.rounded-lg.aspect-square.mb-2.object-cover(src=`${photo ? '/img/users/'+photo : '/img/person-icon.png'}` alt="")
+        .flex.items-center.w-full
+            span.text-gray-900.text-base.font-semibold.line-clamp-1.w-full=name
+        .flex.items-center.w-full
+            span.text-gray-500.text-base.font-light.line-clamp-1.w-full=email
+        .flex.space-x-1.items-center.text-xs
+            span.material-icons.text-gray-500.text-base verified
+            p.text-gray-500.text-xs.font-light.line-clamp-1=date
+
+block content
+    main.flex.flex-col.justify-start.items-start.grow.bg-gray-100.w-full
+        if users
+            .grid.grid-cols-6.gap-6.m-6
+                each item in users
+                    - const date = item.createdAt.toLocaleString('id', {day: 'numeric', month: 'long', year:'numeric'})
+                    +userBox(`${item._id}`, `${item.photo}`, `${item.name}`, `${item.email}`, `${date}`)
+        else
+            .flex.justify-center.items-center.grow.w-full
+                h1.text-sm.text-gray-400 Data pengguna tidak ditemukan

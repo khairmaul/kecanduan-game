@@ -1,0 +1,9 @@
+extends base
+
+block content 
+    main.flex.flex-col.justify-center.items-center.grow.bg-gray-100.space-y-6
+        img.h-52.object-cover.items-center(src='/img/404-game.png')
+        h1.text-3xl.font-bold.tracking-tight.text-gray-900 Halaman Tidak Ditemukan!, Anda Harus Memiliki Akun Untuk Dapat Melakukan Konsultasi 
+        p.text-base.leading-7.text-gray-600=msg
+        .flex.items-center.justify-center.gap-x-6
+            a.rounded-full.bg-purple-900.text-sm.font-semibold.text-white.shadow-sm.px-6.py-3(href='/' class='hover:shadow-lg ') Kembali ke dashboard

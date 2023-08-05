@@ -1,0 +1,13 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.singleQuote": true,
+  "tailwindCSS.emmetCompletions": true,
+  "editor.fontSize": 14,
+  "scm.inputFontSize": 14,
+  "markdown.preview.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
+  "interactiveSession.editor.fontSize": 14
+}

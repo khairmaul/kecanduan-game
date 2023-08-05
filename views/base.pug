@@ -1,0 +1,25 @@
+doctype html
+html(lang="id")
+    head
+        block head
+            meta(charset='UTF-8')
+            meta(name='viewport' content='width=device-width, initial-scale=1.0')
+            link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+            link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css')
+            link(rel='stylesheet' href='/css/output.css')
+            link(rel='shortcut icon' type='image/png' href='/img/logo.png')
+            title Game Addiction | #{title}
+    body.min-h-screen.flex.flex-col.border-box.transition-all.duration-500.linear.bg-white.p-0.m-0
+
+        include _style
+
+        include _header
+
+        block content
+
+        include _footer
+
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js')
+        script(src='https://cdn.jsdelivr.net/npm/chart.js')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer")
+        script(type='module' src='/js/bundled/index.js')
